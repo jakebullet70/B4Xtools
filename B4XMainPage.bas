@@ -15,7 +15,9 @@ Sub Class_Globals
 	Private B4XImageView1 As B4XImageView
 	Private btnJSONtools As Button
 	Private btnFormsBuilder As Button
-	Private TrayIcon1 As TrayIcon
+	Private SysTray As SystemTray
+	Private TrayIcon As TrayIcon
+	
 	Private FormMain As Form
 	Private btnB4JmenuDesigner As Button
 End Sub
@@ -32,32 +34,52 @@ Private Sub B4XPage_Created (Root1 As B4XView)
 	Root = Root1
 	Root.LoadLayout("MainPage")
 	FormMain = B4XPages.GetNativeParent(Me).As(Form)
+
+	Dim bitmap As B4XBitmap = xui.LoadBitmap(File.DirAssets,"banner.jpg")
+	B4XImageView1.Bitmap = bitmap
 	
-	'ticon.Initialize("ticon"
-	B4XImageView1.Load(File.DirAssets,"banner.jpg")
+	SysTray.
+	
+	TrayIcon.Initialize("TrayIcon1", bitmap, Null)
+	TrayIcon.ToolTip = "B4X Support Tools"
+	
+	SysTray.AddTrayIcon(TrayIcon)
+	FormMain.Icon = bitmap
+	frmHelpers.SetMinWidth(FormMain,400)
+	frmHelpers.SetMinHeight(FormMain,100)
+	
 End Sub
 
 'You can see the list of page related events in the B4XPagesManager object. The event name is B4XPage.
 
-
+Private Sub B4Xpages_CloseRequest As ResumableSub
+	SysTray.RemoveTrayIcon(TrayIcon)
+	Return True
+End Sub
 
 Private Sub TrayIcon1_Click
-	
-End Sub
-Sub TrayIcon1_DoubleClick
+	Log("TrayIcon1_Click")
 	frmHelpers.MaximizeForm(FormMain)
 End Sub
+
+Sub TrayIcon1_DoubleClick
+	Log("TrayIcon1_DoubleClick")
+	frmHelpers.MaximizeForm(FormMain)
+End Sub
+
 Sub TrayIcon1_MenuClick (txt As String)
-'	Select txt
-'		Case "Disattiva"
+	Select txt
+		Case "Disattiva"
 '			TrayIcon1.SetImage(BlueImage)
 '			isActive = False
-'		Case "Attiva"
+		Case "Attiva"
 '			isActive = True
 '			TrayIcon1.SetImage(GreenImage)
-'		Case "Esci"
-'			ExitApplication
-'	End Select
+		Case "Exit"
+			SysTray.RemoveTrayIcon(TrayIcon)
+			Sleep(0)
+			ExitApplication
+	End Select
 End Sub
 
 

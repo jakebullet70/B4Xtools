@@ -13,10 +13,11 @@ Library5=xui views
 Library6=b4xpreferencesdialog
 Module1=B4XMainPage
 Module2=frmHelpers
-Module3=pageFormsDesigner
+Module3=frmUtils
+Module4=pageFormsDesigner
 NumberOfFiles=2
 NumberOfLibraries=6
-NumberOfModules=3
+NumberOfModules=4
 Version=10
 @EndOfDesignText@
 #Region Project Attributes 

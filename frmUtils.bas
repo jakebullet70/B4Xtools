@@ -1,13 +1,17 @@
 ﻿B4J=true
 Group=Default Group
 ModulesStructureVersion=1
-Type=StaticCode
+Type=Class
 Version=10
 @EndOfDesignText@
-'Static code module
-Sub Process_Globals
+Sub Class_Globals
 	Private fx As JFX, xui As XUI
 End Sub
+
+'Initializes the object. You can add parameters to this method if needed.
+Public Sub Initialize
+End Sub
+
 
 
 
@@ -141,3 +145,34 @@ End Sub
 
 
 
+#if Java
+
+import javafx.collections.ObservableList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
+public static void ifStageIsIconified(Stage stage){
+
+    stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+    @Override
+    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+        Boolean minimized = t1.booleanValue();
+        ba.raiseEvent(getObject(), "form_minimized", minimized);
+    }
+});
+
+}
+public static void ifStageIsMaximized(Stage stage){
+
+    stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
+
+        @Override
+        public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+            Boolean maximized = t1.booleanValue();
+            ba.raiseEvent(getObject(), "form_maximized", maximized);
+        }
+    });
+
+}
+#end if
