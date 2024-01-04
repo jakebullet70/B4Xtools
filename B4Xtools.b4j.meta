@@ -13,6 +13,6 @@ ModuleClosedNodes1=
 ModuleClosedNodes2=
 ModuleClosedNodes3=
 ModuleClosedNodes4=
-NavigationStack=B4XMainPage,TrayIcon1_Click,62,0,B4XMainPage,TrayIcon1_DoubleClick,72,0,B4XMainPage,TrayIcon1_MenuClick,74,0,Main,AppStart,12,0,Main,MainForm_Closed,33,0,B4XMainPage,btnJSONtools_Click,99,0,B4XMainPage,btnClose_Click,53,5,Visual Designer,MainPage.bjl,-100,6,B4XMainPage,B4XPage_Created,44,6
+NavigationStack=B4XMainPage,TrayIcon1_MenuClick,74,0,Main,MainForm_Closed,33,0,B4XMainPage,btnJSONtools_Click,99,0,B4XMainPage,btnClose_Click,53,5,Visual Designer,MainPage.bjl,-100,6,B4XMainPage,B4XPage_Created,44,6,Main,MainForm_IconifiedChanged,46,0,Main,form_minimized,46,0,Main,AppStart,14,0,Main,MainForm_Resize,31,0,Main,form_maximized,62,0
 SelectedBuild=0
 VisibleModules=1,2

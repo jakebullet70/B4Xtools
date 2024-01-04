@@ -35,10 +35,10 @@ Sub AppStart (Form1 As Form, Args() As String)
 	MainForm = Form1
 	MainForm.Show
 	
-'	Dim joform As JavaObject = MainForm
-'	Dim joStage As JavaObject=joform.GetFieldJO("stage")
-'	(Me).As(JavaObject).RunMethod("ifStageIsIconified",Array(joStage))
-'	(Me).As(JavaObject).RunMethod("ifStageIsMaximized",Array(joStage))
+	Dim joform As JavaObject = MainForm
+	Dim joStage As JavaObject=joform.GetFieldJO("stage")
+	(Me).As(JavaObject).RunMethod("ifStageIsIconified",Array(joStage))
+	(Me).As(JavaObject).RunMethod("ifStageIsMaximized",Array(joStage))
 	
 	Dim PagesManager As B4XPagesManager
 	PagesManager.Initialize(MainForm)
@@ -67,45 +67,46 @@ Public Sub MainForm_IconifiedChanged (Iconified As Boolean)
 End Sub
 #End Region
 
-'Private Sub form_minimized(isMinimized As Boolean)
-'	Log($"Form minimized: ${isMinimized}"$)
-'    
-'End Sub
-'
-'Private Sub form_maximized(isMaximized As Boolean)
-'	Log($"Form minimized: ${isMaximized}"$)
-'    
-'End Sub
+Private Sub form_minimized(isMinimized As Boolean)
+	Log($"Form minimized: ${isMinimized}"$)
+    
+End Sub
+
+Private Sub form_maximized(isMaximized As Boolean)
+	Log($"Form minimized: ${isMaximized}"$)
+    
+End Sub
 
 
-'#if Java
-'
-'import javafx.collections.ObservableList;
-'import javafx.beans.value.ChangeListener;
-'import javafx.beans.value.ObservableValue;
-'
-'public static void ifStageIsIconified(Stage stage){
-'
-'    stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
-'
-'    @Override
-'    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-'        Boolean minimized = t1.booleanValue();
-'        ba.raiseEvent(getObject(), "form_minimized", minimized);
-'    }
-'});
-'
-'}
-'public static void ifStageIsMaximized(Stage stage){
-'
-'    stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
-'
-'        @Override
-'        public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-'            Boolean maximized = t1.booleanValue();
-'            ba.raiseEvent(getObject(), "form_maximized", maximized);
-'        }
-'    });
-'
-'}
-'#end if
+#if Java
+
+import javafx.collections.ObservableList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.stage.Stage;
+
+public static void ifStageIsIconified(Stage stage){
+
+    stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+
+    @Override
+    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+        Boolean minimized = t1.booleanValue();
+        ba.raiseEvent(getObject(), "form_minimized", minimized);
+    }
+});
+
+}
+public static void ifStageIsMaximized(Stage stage){
+
+    stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
+
+        @Override
+        public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+            Boolean maximized = t1.booleanValue();
+            ba.raiseEvent(getObject(), "form_maximized", maximized);
+        }
+    });
+
+}
+#end if
