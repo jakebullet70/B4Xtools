@@ -17,9 +17,11 @@ Sub Class_Globals
 	Private btnFormsBuilder As Button
 	Private SysTray As SystemTray
 	Private TrayIcon As TrayIcon
+	Private frmHelpers As clsFormHelpers
 	
 	Private FormMain As Form
 	Private btnB4JmenuDesigner As Button
+	Private btnClose As B4XView
 End Sub
 
 'https://www.b4x.com/android/forum/threads/hide-taskbar-icon-when-app-window-is-minimised.141869/#post-899324
@@ -33,38 +35,48 @@ Private Sub B4XPage_Created (Root1 As B4XView)
 
 	Root = Root1
 	Root.LoadLayout("MainPage")
-	FormMain = B4XPages.GetNativeParent(Me).As(Form)
+
+	FormMain = B4XPages.GetNativeParent(Me)
+	frmHelpers.Initialize(FormMain)
+	
 
 	Dim bitmap As B4XBitmap = xui.LoadBitmap(File.DirAssets,"banner.jpg")
 	B4XImageView1.Bitmap = bitmap
 	
-	SysTray.
-	
 	TrayIcon.Initialize("TrayIcon1", bitmap, Null)
 	TrayIcon.ToolTip = "B4X Support Tools"
 	
+	SysTray.Initialize
 	SysTray.AddTrayIcon(TrayIcon)
 	FormMain.Icon = bitmap
-	frmHelpers.SetMinWidth(FormMain,400)
-	frmHelpers.SetMinHeight(FormMain,100)
+	B4XPages.SetTitle(Me,"B4X Tools - B.O.S.S Style")
+	
+	frmHelpers.SetMinWidth(400)
+	frmHelpers.SetMinHeight(200)
+	
 	
 End Sub
 
 'You can see the list of page related events in the B4XPagesManager object. The event name is B4XPage.
 
-Private Sub B4Xpages_CloseRequest As ResumableSub
+Private Sub btnClose_Click
+	FormMain.Close
+End Sub
+
+Private Sub B4XPage_CloseRequest As ResumableSub
+	Log("B4Xpages_CloseRequest")
 	SysTray.RemoveTrayIcon(TrayIcon)
 	Return True
 End Sub
 
 Private Sub TrayIcon1_Click
 	Log("TrayIcon1_Click")
-	frmHelpers.MaximizeForm(FormMain)
+	frmHelpers.MaximizeForm()
 End Sub
 
 Sub TrayIcon1_DoubleClick
 	Log("TrayIcon1_DoubleClick")
-	frmHelpers.MaximizeForm(FormMain)
+	frmHelpers.MaximizeForm()
 End Sub
 
 Sub TrayIcon1_MenuClick (txt As String)
@@ -95,6 +107,25 @@ End Sub
 Private Sub btnJSONtools_Click
 	
 End Sub
+
+'Private Sub form_minimized(isMinimized As Boolean)
+'	Log($"Form minimized: ${isMinimized}"$)
+'    
+'End Sub
+'
+'Private Sub form_maximized(isMaximized As Boolean)
+'	Log($"Form minimized: ${isMaximized}"$)
+'    
+'End Sub
+
+
+
+
+'================================================================================================================================
+'================================================================================================================================
+'================================================================================================================================
+
+
 
 
 'Dim PageButtonSettings As ButtonSettings
@@ -163,4 +194,6 @@ End Sub
 ''	Next
 ''	Return mi
 'End Sub
+
+
 

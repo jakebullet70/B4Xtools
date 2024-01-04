@@ -6,23 +6,24 @@ FileGroup1=Default Group
 FileGroup2=New Group
 Group=Default Group
 Library1=b4xpages
-Library2=jcore
-Library3=jfx
-Library4=jsystemtray
-Library5=xui views
-Library6=b4xpreferencesdialog
+Library2=b4xpreferencesdialog
+Library3=jcore
+Library4=jfx
+Library5=jsystemtray
+Library6=xui views
+Library7=javaobject
 Module1=B4XMainPage
-Module2=frmHelpers
+Module2=clsFormHelpers
 Module3=frmUtils
 Module4=pageFormsDesigner
 NumberOfFiles=2
-NumberOfLibraries=6
+NumberOfLibraries=7
 NumberOfModules=4
 Version=10
 @EndOfDesignText@
 #Region Project Attributes 
 	#MainFormWidth: 400
-	#MainFormHeight: 100
+	#MainFormHeight: 200
 #End Region
 
 Sub Process_Globals
@@ -33,6 +34,12 @@ End Sub
 Sub AppStart (Form1 As Form, Args() As String)
 	MainForm = Form1
 	MainForm.Show
+	
+'	Dim joform As JavaObject = MainForm
+'	Dim joStage As JavaObject=joform.GetFieldJO("stage")
+'	(Me).As(JavaObject).RunMethod("ifStageIsIconified",Array(joStage))
+'	(Me).As(JavaObject).RunMethod("ifStageIsMaximized",Array(joStage))
+	
 	Dim PagesManager As B4XPagesManager
 	PagesManager.Initialize(MainForm)
 End Sub
@@ -59,3 +66,46 @@ Public Sub MainForm_IconifiedChanged (Iconified As Boolean)
 	B4XPages.Delegate.MainForm_IconifiedChanged(Iconified)
 End Sub
 #End Region
+
+'Private Sub form_minimized(isMinimized As Boolean)
+'	Log($"Form minimized: ${isMinimized}"$)
+'    
+'End Sub
+'
+'Private Sub form_maximized(isMaximized As Boolean)
+'	Log($"Form minimized: ${isMaximized}"$)
+'    
+'End Sub
+
+
+'#if Java
+'
+'import javafx.collections.ObservableList;
+'import javafx.beans.value.ChangeListener;
+'import javafx.beans.value.ObservableValue;
+'
+'public static void ifStageIsIconified(Stage stage){
+'
+'    stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
+'
+'    @Override
+'    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+'        Boolean minimized = t1.booleanValue();
+'        ba.raiseEvent(getObject(), "form_minimized", minimized);
+'    }
+'});
+'
+'}
+'public static void ifStageIsMaximized(Stage stage){
+'
+'    stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
+'
+'        @Override
+'        public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
+'            Boolean maximized = t1.booleanValue();
+'            ba.raiseEvent(getObject(), "form_maximized", maximized);
+'        }
+'    });
+'
+'}
+'#end if

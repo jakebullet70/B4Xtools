@@ -144,35 +144,3 @@ End Sub
 
 
 
-
-#if Java
-
-import javafx.collections.ObservableList;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-
-public static void ifStageIsIconified(Stage stage){
-
-    stage.iconifiedProperty().addListener(new ChangeListener<Boolean>() {
-
-    @Override
-    public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-        Boolean minimized = t1.booleanValue();
-        ba.raiseEvent(getObject(), "form_minimized", minimized);
-    }
-});
-
-}
-public static void ifStageIsMaximized(Stage stage){
-
-    stage.maximizedProperty().addListener(new ChangeListener<Boolean>() {
-
-        @Override
-        public void changed(ObservableValue<? extends Boolean> ov, Boolean t, Boolean t1) {
-            Boolean maximized = t1.booleanValue();
-            ba.raiseEvent(getObject(), "form_maximized", maximized);
-        }
-    });
-
-}
-#end if
